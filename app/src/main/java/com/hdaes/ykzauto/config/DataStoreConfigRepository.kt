@@ -5,7 +5,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.clear
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -54,7 +53,9 @@ class DataStoreConfigRepository(context: Context) : ConfigRepository {
     }
 
     override suspend fun reset() {
-        dataStore.edit(MutablePreferences::clear)
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
     }
 
     private fun readConfig(preferences: Preferences): AppConfig {
