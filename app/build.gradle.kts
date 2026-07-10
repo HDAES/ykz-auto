@@ -58,7 +58,7 @@ kotlin {
 
 dependencies {
     implementation("androidx.activity:activity-compose:1.10.1")
-    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.datastore:datastore-preferences:1.2.1")
 
     val composeBom = platform("androidx.compose:compose-bom:2026.06.00")
