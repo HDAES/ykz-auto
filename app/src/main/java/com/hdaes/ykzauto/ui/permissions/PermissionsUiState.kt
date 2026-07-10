@@ -17,7 +17,7 @@ data class PermissionsUiState(
             accessibilityAccessGranted,
             appNotificationsEnabled,
             batteryOptimizationIgnored
-        ).count(Boolean::not).let { REQUIRED_PERMISSION_COUNT - it }
+        ).count { granted -> granted }
 
     companion object {
         const val REQUIRED_PERMISSION_COUNT = 4
