@@ -1,9 +1,5 @@
-package com.hdaes.ykzauto
+package com.hdaes.ykzauto.ui.home
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,26 +20,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hdaes.ykzauto.ui.theme.YkzAutoTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            YkzAutoTheme {
-                HomeScreen()
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreen() {
-    val plannedCapabilities = listOf(
-        "监听目标应用的通知",
-        "通过无障碍服务执行页面点击与滚动",
-        "按时间段启用或暂停自动化任务",
-        "记录执行结果、失败原因与重试次数"
+fun HomeScreen() {
+    val completedModules = listOf(
+        "统一配置模型与安全默认值",
+        "ConfigRepository 配置访问边界",
+        "Preferences DataStore 仓库实现",
+        "星期与时间段调度模型",
+        "通知、无障碍、工作流、设备和日志模块边界"
     )
 
     Scaffold(
@@ -59,44 +44,32 @@ private fun HomeScreen() {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                StatusCard()
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier.padding(20.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = "第 1 步：架构骨架完成",
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        Text(
+                            text = "通知监听和自动点击尚未实现。夜间值守默认关闭。",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
             }
 
-            item {
-                Text(
-                    text = "计划能力",
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-
-            items(plannedCapabilities) { capability ->
+            items(completedModules) { module ->
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = capability,
+                        text = module,
                         modifier = Modifier.padding(16.dp),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun StatusCard() {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "项目初始化完成",
-                style = MaterialTheme.typography.headlineSmall
-            )
-            Text(
-                text = "当前为基础工程，下一步可接入通知监听、无障碍服务和任务调度。",
-                style = MaterialTheme.typography.bodyMedium
-            )
         }
     }
 }
